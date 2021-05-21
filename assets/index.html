@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bird Encyclopedia</title>
+</head>
+<body>
+  <h1>The Bird - Go lang - Encyclopedia</h1>
+
+  <table>
+    <tr>
+      <th>Species</th>
+      <th>Description</th>
+    </tr>
+    <td>Pigeon</td>
+    <td>Common in everywhere</td>
+  </table>
+
+  <br>
+
+  <form action="/bird" method="POST">
+    Species:
+    <input type="text" name="species">
+    <br>
+    Description:
+    <input type="text" name="description">
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    birdTable = document.querySelector("table")
+
+    fetch("/bird")
+      .then(response => response.json())
+      .then(birdList => {
+        birdList.forEach(bird => {
+          row = document.createElement("tr")
+          
+          species = document.createElement("td")
+          species.innerHTML = bird.species
+          
+          description = document.createElement("td")
+          description.innerHTML = bird.description
+
+          row.appendChild(species)
+          row.appendChild(description)
+          birdTable.appendChild(row)
+        });
+      })
+
+  </script>
+
+</body>
+</html>

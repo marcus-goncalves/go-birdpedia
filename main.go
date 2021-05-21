@@ -17,6 +17,11 @@ func routesBuilder() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handleHome).Methods("GET")
 
+	// Cfg static files
+	staticFileDir := http.Dir("./assets/")
+	staticFileHandler := http.StripPrefix("/assets/", http.FileServer(staticFileDir))
+	r.PathPrefix("/assets/").Handler(staticFileHandler).Methods("GET")
+
 	return r
 }
 

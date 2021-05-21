@@ -89,3 +89,25 @@ func TestRouterForNonExistentRoute(t *testing.T) {
 	}
 
 }
+
+func TestStaticFiles(t *testing.T) {
+	r := routesBuilder()
+	mockServer := httptest.NewServer(r)
+
+	res, err := http.Get(mockServer.URL + "/assets/")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Test for status code
+	if res.StatusCode != http.StatusOK {
+		t.Errorf("Wrong status code. Expected: %v, Got: %v", http.StatusOK, res.StatusCode)
+	}
+
+	// Test for header type
+	contentType := res.Header.Get("Content-Type")
+	expected := "text-html; charset=utf-8"
+	if contentType != expected {
+		t.Errorf("Unexpected Body. Expected: %v, Got: %v", expected, contentType)
+	}
+}
