@@ -17,7 +17,7 @@ func getBirdHandler(w http.ResponseWriter, r *http.Request) {
 	birdListBytes, err := json.Marshal(birds)
 
 	if err != nil {
-		fmt.Println(fmt.Errorf("Error %v", err))
+		fmt.Println(fmt.Errorf("error %v", err))
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -30,7 +30,7 @@ func createBirdHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := r.ParseForm()
 	if err != nil {
-		fmt.Println(fmt.Errorf("Error %v", err))
+		fmt.Println(fmt.Errorf("error %v", err))
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
