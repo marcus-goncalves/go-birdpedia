@@ -8,11 +8,16 @@ import (
 )
 
 func main() {
-	r := mux.NewRouter()
-
-	r.HandleFunc("/", handleHome).Methods("GET")
+	r := routesBuilder()
 
 	http.ListenAndServe(":8000", r)
+}
+
+func routesBuilder() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/", handleHome).Methods("GET")
+
+	return r
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
