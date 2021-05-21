@@ -16,6 +16,8 @@ func main() {
 func routesBuilder() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", handleHome).Methods("GET")
+	r.HandleFunc("/bird", getBirdHandler).Methods("GET")
+	r.HandleFunc("/bird", createBirdHandler).Methods("POST")
 
 	// Cfg static files
 	staticFileDir := http.Dir("./assets/")
